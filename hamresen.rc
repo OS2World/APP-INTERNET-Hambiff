@@ -1,0 +1,79 @@
+/*
+ * hamresen.rc - Resource for Hamster Biff, English Version
+ */
+
+#include <os2.h>
+#include "hamres.h"
+
+ICON    ID_HAMBIFF  hambiff.ico
+
+BITMAP  ID_BMPWAIT  bmpwait.bmp
+BITMAP  ID_BMPPOLL  bmppoll.bmp
+BITMAP  ID_BMPMAIL  bmpmail.bmp
+BITMAP  ID_BMPFAIL  bmpfail.bmp
+
+MENU    IDM_POPUP
+BEGIN
+    MENUITEM    "~Move",    IDM_MOVE
+    MENUITEM    "~Hide",    IDM_HIDE
+    MENUITEM    SEPARATOR
+    MENUITEM    "~Setup",   IDM_SETUP
+    MENUITEM    "~About",   IDM_ABOUT
+    MENUITEM    SEPARATOR
+    MENUITEM    "E~xit",    IDM_EXIT
+END
+
+DLGTEMPLATE IDD_SETUP
+BEGIN
+    DIALOG  "Check Mail - setup", 0, 0, 0, 180, 68, , 
+                                    FCF_TITLEBAR | FCF_DLGBORDER
+    BEGIN
+        ICON    ID_HAMBIFF,     -1,  4, 40,  0, 0
+        LTEXT   "Server",       -1, 36, 54, 48, 8
+        LTEXT   "User",         -1, 36, 42, 48, 8
+        LTEXT   "Password",     -1, 36, 30, 48, 8
+	LTEXT   "Interval",     -1, 36, 18, 48, 8
+
+        ENTRYFIELD  "", IDD_SHOST, 86, 54, 88, 8, ES_LEFT
+        ENTRYFIELD  "", IDD_SUSER, 86, 42, 88, 8, ES_LEFT
+        ENTRYFIELD  "", IDD_SPASS, 86, 30, 88, 8, ES_LEFT | ES_UNREADABLE
+	SPINBUTTON      IDD_STIME, 86, 16, 88, 8,
+            SPBS_MASTER | SPBS_NUMERICONLY | SPBS_JUSTRIGHT
+        
+        DEFPUSHBUTTON   "OK",       DID_OK,      20, 2, 40, 12
+	PUSHBUTTON      "Cancel",   DID_CANCEL,  70, 2, 40, 12
+	PUSHBUTTON      "Save",     IDD_SSAVE,  120, 2, 40, 12
+    END
+END
+
+DLGTEMPLATE IDD_ABOUT
+BEGIN
+    DIALOG  "Check Mail - about", 0, 0, 0, 180, 68, , 
+                                    FCF_TITLEBAR | FCF_DLGBORDER
+    BEGIN
+	CONTROL ID_BMPMAIL, IDD_APICT,  2, 16, 80, 64, 
+	                    WC_STATIC, SS_BITMAP | WS_VISIBLE
+	MLE         "", IDD_AMESG, 60, 16, 118, 50, 
+                            MLS_READONLY | MLS_WORDWRAP | MLS_IGNORETAB
+        DEFPUSHBUTTON   "OK",   DID_OK,  2, 2, 40, 12
+	PUSHBUTTON      "more", IDD_ANEXT, 138, 2, 40, 12 
+    END
+END
+
+STRINGTABLE
+BEGIN
+    IDD_DESC0   ,   "hambiff v1.03\x0a"
+    IDD_DESC0+1 ,   "Hamster checks your mail box\x0a"
+    IDD_DESC0+2 ,   "\tHe is 'OKOGE'\x0a"
+    IDD_DESC0+3 ,   "\tgolden hamster, male\x0a"
+    IDD_DESC1   ,   "Usually, he is sleeping, and "
+    IDD_DESC1+1 ,   "occationally wakes up and checks your mail box."
+    IDD_DESC2   ,   "Checking mail box\x0a"
+    IDD_DESC2+1 ,   "If nothing found, he sleeps again.\x0a"
+    IDD_DESC3   ,   "He found mail.\x0a"
+    IDD_DESC3+1 ,   "Please praise him with mouse."
+    IDD_DESC3+2 ,   ""
+    IDD_DESC4   ,   "He is angry with trouble.\x0a"
+    IDD_DESC4+1 ,   "Please calm down him with mouse."
+    IDD_DESC4+2 ,   ""
+END

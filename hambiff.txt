@@ -1,0 +1,166 @@
+
+        hambiff  -  Hamster checks your mail box
+
+                akira@sra.co.jp
+
+1. Introduction
+
+I write this program as replacement for last X program 'xbiff'.
+
+    I've been running 'xbiff' on remote mail server and display on 
+    local PMX.  But if remote mail server down, 'xbiff' also down
+    (off course) and display vanish.  I dislike this behavior, I
+    hope program should report trouble on remote server.  So I write
+    local (PM) program which can report trouble of remote server.
+    
+        But, you may found lot of programs look-alike.
+
+As I wondering pictures to show mail status, daughter write cute
+pictures.   So using those pictures, I finally finished this program.
+
+2. Before use this program
+
+This program checks mail with POP3, your mail server should support POP3
+protocol.
+
+As local mail server does not support APOP authentication, this program
+uses USER/PASS authentication.  This authentication send user name,
+password pair to network as plain text.  I don't care this, because
+local network is firewalled, but it should be danger to use this program
+on open, non-firewalled network.
+
+3.Usage
+
+3.1. Startup
+
+Just use this program, invoke this program from command line, or create
+program object and double click it.  First time, there are no server
+informations, program shows setup dialog to enter server informations.
+
+    +-------------------------------------------------+
+    |   Check Mail - setup                            |
+    +-------------------------------------------------+
+    | +-------+             +-----------------------+ |
+    | |       | Server      |                       | |
+    | |Picture|             +-----------------------+ |
+    | |       | User        |                       | |
+    | +-------+             +-----------------------+ |
+    |           Password    |                       | |
+    |                       +-------------------+---+ |
+    |           Interval    |                 30|   | |
+    |                       +-------------------+---+ |
+    |     +---------+   +---------+   +---------+     |
+    |     |    OK   |   |  Cancel |   |  Save   |     |
+    |     +---------+   +---------+   +---------+     |
+    +-------------------------------------------------+
+
+Cancel in this dialog terminate program.  If you want to continue, set
+mail server, user name, password and check interval (in sec).  Press
+OK button start mail check.  If somthing lost, program shows this dialog
+again.
+
+If you want to use settings again, press 'Save' button. Settings are
+saved to '.INI' file and refered next invocation.
+
+3.2. Normal Operation
+
+When this program start mail check, picture (of hamster) is shown near
+mouse pointer.  You can move picture with draggin by right mouse button.
+
+    Or you can specify initial positions with command line options.
+
+If first picture was 'sleeping', this program will check your mail box
+after specified interval.
+
+    Or click mouse to check mail immediately.
+
+When program checks mail box, it alters picture, and resulting
+
+    no mails            again sleeping
+    got mails           hamster get mail 
+    error happened      got angry
+
+If there was no mail, hamster checks mail box after specified interval.
+If there are mails, or got some trouble, no check occurs after interval.
+In this cases, click hamster to start new check.
+
+3.3. Menu Operations
+
+Pressinf right mouse button invokes popup menu.
+
+    +-------+
+    | Move  |
+    | Hide  |
+    +-------+
+    | Setup |       Show Setup Dialog
+    | About |       Short descrition about this program
+    +-------+
+    | Exit  |
+    +-------+
+
+3.4. Setup Dialog
+
+Setup dialog shows current settings.
+
+    +-------------------------------------------------+
+    |   Check Mail - setup                            |
+    +-------------------------------------------------+
+    | +-------+             +-----------------------+ |
+    | |       | Server      |foo                    | |
+    | |Picture|             +-----------------------+ |
+    | |       | User        |bar                    | |
+    | +-------+             +-----------------------+ |
+    |           Password    |                       | |
+    |                       +-------------------+---+ |
+    |           Interval    |                 15|   | |
+    |                       +-------------------+---+ |
+    |     +---------+   +---------+   +---------+     |
+    |     |    OK   |   |  Cancel |   |  Save   |     |
+    |     +---------+   +---------+   +---------+     |
+    +-------------------------------------------------+
+
+    OK              Continue with new settings
+    Cancel          Conitnue with old settings
+    Save            Save new settings
+
+4. Command Line Options
+
+You can specify following command line options.
+
+Initial Positions
+
+    -x #            horizontal position
+    -y #            vertical position
+    -l              adjust to left  side of the desktop
+    -r              adjust to right side of the desktop
+    -b              adjust to top    of the desktop
+    -t              adjust to bottom of the desktop
+    
+    You can combine l,r,b,t, for example,
+    
+        -rt         place to upper right corner
+	-lb         place to lower left corner
+    
+Mail Server Informations
+
+    -h host         name of mail server
+    -u user         user name
+    -w #            check interval
+
+    If you specified user name with command line, password once saved in
+    the INI file was disposed, and you need to specify new password with
+    setup dialog.
+
+5. Change Pictures ?
+
+Off course  I like current pictures ('cause daughter wirte them), but if
+ you want to use another pictures, then create following pictures,
+
+    bmpwait.bmp     sleeping
+    bmppoll.bmp     polling
+    bmpmail.bmp     got mail
+    bmpfail.bmp     got tourble
+
+with same size, and 'make'.  Also, if you changed pictures, you also
+change descriptions in about dialog.  They are defined with string table
+in 'hamresen.rc' resource file.

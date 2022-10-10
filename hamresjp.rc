@@ -1,0 +1,79 @@
+/*
+ * hamresjp.rc - Resource for Hamster Biff, Japanese Version
+ */
+
+#include <os2.h>
+#include "hamres.h"
+
+ICON    ID_HAMBIFF  hambiff.ico
+
+BITMAP  ID_BMPWAIT  bmpwait.bmp
+BITMAP  ID_BMPPOLL  bmppoll.bmp
+BITMAP  ID_BMPMAIL  bmpmail.bmp
+BITMAP  ID_BMPFAIL  bmpfail.bmp
+
+MENU    IDM_POPUP
+BEGIN
+    MENUITEM    "移動",     IDM_MOVE
+    MENUITEM    "隠す",     IDM_HIDE
+    MENUITEM    SEPARATOR
+    MENUITEM    "設定",     IDM_SETUP
+    MENUITEM    "情報",     IDM_ABOUT
+    MENUITEM    SEPARATOR
+    MENUITEM    "終了",     IDM_EXIT
+END
+
+DLGTEMPLATE IDD_SETUP
+BEGIN
+    DIALOG  "メイルチェック - 設定", 0, 0, 0, 180, 68, , 
+                                    FCF_TITLEBAR | FCF_DLGBORDER
+    BEGIN
+        ICON    ID_HAMBIFF,     -1,  4, 40,  0, 0
+        LTEXT   "サーバ名",     -1, 36, 54, 48, 8
+        LTEXT   "ユーザ名",     -1, 36, 42, 48, 8
+        LTEXT   "パスワード",   -1, 36, 30, 48, 8
+	LTEXT   "チェック間隔", -1, 36, 18, 48, 8
+
+        ENTRYFIELD  "", IDD_SHOST, 86, 54, 88, 8, ES_LEFT
+        ENTRYFIELD  "", IDD_SUSER, 86, 42, 88, 8, ES_LEFT
+        ENTRYFIELD  "", IDD_SPASS, 86, 30, 88, 8, ES_LEFT | ES_UNREADABLE
+	SPINBUTTON      IDD_STIME, 86, 16, 88, 8,
+            SPBS_MASTER | SPBS_NUMERICONLY | SPBS_JUSTRIGHT
+        
+        DEFPUSHBUTTON   "設定", DID_OK,      20, 2, 40, 12
+	PUSHBUTTON      "取消", DID_CANCEL,  70, 2, 40, 12
+	PUSHBUTTON      "保管", IDD_SSAVE,  120, 2, 40, 12
+    END
+END
+
+DLGTEMPLATE IDD_ABOUT
+BEGIN
+    DIALOG  "メイルチェック - 情報", 0, 0, 0, 180, 68, , 
+                                    FCF_TITLEBAR | FCF_DLGBORDER
+    BEGIN
+	CONTROL ID_BMPMAIL, IDD_APICT,  2, 16, 80, 64, 
+	                    WC_STATIC, SS_BITMAP | WS_VISIBLE
+	MLE         "", IDD_AMESG, 60, 16, 118, 50, 
+                            MLS_READONLY | MLS_WORDWRAP | MLS_IGNORETAB
+        DEFPUSHBUTTON   "わかった", DID_OK,  2, 2, 40, 12
+	PUSHBUTTON      "もっと",  IDD_ANEXT, 138, 2, 40, 12 
+    END
+END
+
+STRINGTABLE
+BEGIN
+    IDD_DESC0   ,   "hambiff v1.03\x0a"
+    IDD_DESC0+1 ,   "ハムスターがメイルを調べます。\x0a"
+    IDD_DESC0+2 ,   "\tモデルは「おこげ」、\x0a"
+    IDD_DESC0+3 ,   "\tゴールデン♂\x0a"
+    IDD_DESC1   ,   "普段、ハムスターは寝ていて、"
+    IDD_DESC1+1 ,   "たまに起きて郵便箱を調べます。"
+    IDD_DESC2   ,   "郵便箱を調べています。\x0a"
+    IDD_DESC2+1 ,   "なにも見つからなければまた寝ます。\x0a"
+    IDD_DESC3   ,   "郵便を見つけました。\x0a"
+    IDD_DESC3+1 ,   "ほおっておくとそのままでいるので、"
+    IDD_DESC3+2 ,   "マウスでつついて、ほめてやってください。"
+    IDD_DESC4   ,   "なにか問題がおきるとぶんむくれます。\x0a"
+    IDD_DESC4+1 ,   "ほおっておくとそのままでいるので、"
+    IDD_DESC4+2 ,   "マウスでつついて、なだめてやってください。"
+END
